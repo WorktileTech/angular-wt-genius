@@ -1,7 +1,10 @@
 {
   "name": "angular-wt-notify",
   "version": "1.0.0",
-  "main": "./dist/angular-wt-genius-min.js",
+  "main": [
+    "./dist/angular-wt-genius-min.js",
+    "./src"
+  ],
   "ignore": [
     "test",
     "src",
