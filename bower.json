@@ -1,0 +1,11 @@
+{
+  "main": "./dist/angular-wt-genius-min.js",
+  "ignore": [
+    "test",
+    "src",
+    "gulpfile.js"
+  ],
+  "dependencies": {
+    "notify.js": "1.2.5"
+  }
+}
