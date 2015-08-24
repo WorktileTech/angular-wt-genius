@@ -1,58 +1,78 @@
-angular.module("wt.genius")
-    .service('$wtNotify', wtNotify);
-
-wtNotify.$inject = ['$rootScope', '$wtNotifyConfig'];
-function wtNotify($rootScope, $wtNotifyConfig) {
-    var _self = this;
-    _self.p = {
-        title      : '桌面通知',
-        body       : 'Hey! 我在这里。',
-        icon       : '',
-        tag        : '',
-        lang       : '',
-        timeout    : 5,
-        notifyShow : function () {
-        },
-        notifyClose: function () {
-        },
-        notifyClick: function () {
-        },
-        notifyError: function () {
-        }
-    };
-    _.assign(_self.p, $wtNotifyConfig);
-    _self.needsPermission = Notify.needsPermission;
-    _self.requestPermission = Notify.requestPermission;
-    _self.isSupported = Notify.isSupported;
-    _self.permissionLevel = Notify.permissionLevel;
-
-    //验证是否有权限
-    _self.checkPermission = function (callback_sucess, callback_error, callback_then) {
-        var _callback_sucess = callback_sucess || function () {
+(function () {
+    'use strict';
+    angular.module('wt.genius')
+        .provider('$wtNotify', [function () {
+            var defaults = {};
+            var configOptions = {};
+            this.config = function (value) {
+                configOptions = value;
             };
-        var _callback_error = callback_error || function () {
-            };
-        var _callback_then = callback_then || function () {
-            };
+            this.$get = ['$http',
+                '$document',
+                '$compile',
+                '$rootScope',
+                '$controller',
+                '$templateCache',
+                '$q',
+                '$injector',
+                '$position',
+                '$timeout',
+                function ($http, $document, $compile, $rootScope, $controller, $templateCache, $q, $injector, $position, $timeout) {
+                    function _notify(p) {
+                        var self = this,
+                            options = this.options = angular.extend({}, defaults, configOptions, p);
+                    }
 
-        var _has_permission = true;
-        if (Notify.needsPermission) {
-            Notify.requestPermission(function () {
-                _has_permission = true;
-                _callback_sucess();
-            }, function () {
-                _has_permission = false;
-                _callback_error();
-            });
-        } else {
-            _callback_sucess();
-        }
-        _callback_then();
-        return _has_permission;
-    };
-    //初始化
-    _self.notify = function (p) {
-        _.assign(_self.p, p);
-        return new Notify(_self.p.title, _self.p);
-    };
-}
+                    _notify.prototype.needsPermission = function () {
+                        return Notify.needsPermission;
+                    };
+                    _notify.prototype.requestPermission = function () {
+                        return Notify.requestPermission;
+                    };
+                    _notify.prototype.isSupported = function () {
+                        return Notify.isSupported;
+                    };
+                    _notify.prototype.permissionLevel = function () {
+                        return Notify.permissionLevel;
+                    };
+                    _notify.prototype.checkPermission = function () {
+                        var self = this;
+                        self.hasPermission = true;
+                        self.sucess = function (_fun) {
+                            _fun ? _fun() : null;
+                            return self;
+                        };
+                        self.error = function (_fun) {
+                            _fun ? _fun() : null;
+                            return self;
+                        };
+                        self.then = function (_fun) {
+                            _fun ? _fun() : null;
+                            return self;
+                        };
+
+                        if (Notify.needsPermission) {
+                            Notify.requestPermission(function () {
+                                self.hasPermission = true;
+                                self.sucess();
+                            }, function () {
+                                self.hasPermission = false;
+                                self.error();
+                            });
+                        } else {
+                            self.sucess();
+                        }
+                        self.then();
+
+                        return self;
+                    };
+                    return {
+                        notify: function (p) {
+                            return new _notify(p);
+                        }
+                    };
+                }
+            ];
+        }]);
+
+})();
