@@ -2,7 +2,22 @@
     'use strict';
     angular.module('wt.genius')
         .provider('$wtNotify', [function () {
-            var defaults = {};
+            var defaults = {
+                title      : 'Hey, 我在这里!',
+                body       : '',
+                icon       : '',
+                tag        : '',
+                lang       : 'en',
+                timeout    : 2,
+                notifyShow : function () {
+                },
+                notifyClose: function () {
+                },
+                notifyClick: function () {
+                },
+                notifyError: function () {
+                }
+            };
             var configOptions = {};
             this.config = function (value) {
                 configOptions = value;
