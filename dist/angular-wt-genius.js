@@ -1,3 +1,4 @@
+angular.module('wt.genius', []);
 /**
  * $wtNotify
  * v

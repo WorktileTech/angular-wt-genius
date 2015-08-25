@@ -31,9 +31,14 @@ gulp.task('style', function () {
 gulp.task('js', function () {
     return gulp.src(['./src/main.js', './src/wt-notify/wt-notify.js'])
         .pipe(plumber({errorHandler: error}))
+        .pipe(concat('angular-wt-genius.js'))
+        .pipe(gulp.dest('./dist/'));
+});
+gulp.task('js-min', function () {
+    return gulp.src(['./dist/angular-wt-genius.js'])
         .pipe(uglify())
         .pipe(concat('angular-wt-genius-min.js'))
         .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('default', ['style', 'js']);
+gulp.task('default', ['style', 'js', 'js-min']);
