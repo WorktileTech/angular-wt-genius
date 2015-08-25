@@ -22,22 +22,17 @@
             this.config = function (value) {
                 configOptions = value;
             };
-            this.$get = ['$http',
-                '$document',
-                '$compile',
-                '$rootScope',
-                '$controller',
-                '$templateCache',
-                '$q',
-                '$injector',
-                '$position',
-                '$timeout',
+            this.$get = ['$http', '$document', '$compile', '$rootScope', '$controller', '$templateCache', '$q', '$injector', '$position', '$timeout',
                 function ($http, $document, $compile, $rootScope, $controller, $templateCache, $q, $injector, $position, $timeout) {
                     function _notify(p) {
                         var self = this,
                             options = this.options = angular.extend({}, defaults, configOptions, p);
+                        self.myNotify = new Notify(options.title, options);
                     }
 
+                    _notify.prototype.show = function () {
+                        this.myNotify.show();
+                    };
                     _notify.prototype.needsPermission = function () {
                         return Notify.needsPermission;
                     };
@@ -81,6 +76,7 @@
 
                         return self;
                     };
+
                     return {
                         notify: function (p) {
                             return new _notify(p);
@@ -89,5 +85,4 @@
                 }
             ];
         }]);
-
 })();
