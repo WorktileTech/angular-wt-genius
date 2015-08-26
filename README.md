@@ -39,7 +39,7 @@ $wtNotify.checkPermission(function () {
 
 ##### Static methods and properties
 -----------------------------
-* `$wtNotify.notify` - 初始化方法(没有设置权限时，自动请求权限)
+* `$wtNotify.notify` - 初始化，并显示通知(没有设置权限时，自动请求权限)
   
 * `$wtNotify.notSetPermission` - Boolean - 未设置通知权限
   
