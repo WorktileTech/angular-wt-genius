@@ -45,7 +45,7 @@ $wtNotify.checkPermission(function () {
   
 * `$wtNotify.checkPermission(onPermissionGrantedCallback, onPermissionDeniedCallback, onThenCallback)` - requestPermission 的封装方法，当没有设置权限时，自动请求权限。
 
-* `$wtNotify.requestPermission(onPermissionGrantedCallback, onPermissionDeniedCallback)` - requests permission from the user if needed and handles permission callbacks.
+* `$wtNotify.requestPermission(onPermissionGrantedCallback, onPermissionDeniedCallback)` - 请求设置权限
 
 * `$wtNotify.isSupported` - Boolean - 浏览器支持
 
