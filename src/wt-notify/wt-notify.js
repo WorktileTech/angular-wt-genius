@@ -31,52 +31,57 @@
             };
             this.$get = ['$http', '$document', '$compile', '$rootScope', '$controller', '$templateCache', '$q', '$injector', '$position', '$timeout',
                 function ($http, $document, $compile, $rootScope, $controller, $templateCache, $q, $injector, $position, $timeout) {
+                    var result;
+
                     function _notify(p) {
                         var options = this.options = angular.extend({}, defaults, configOptions, p);
                         var myNotify = new Notify(options.title, options);
-                        myNotify.show();
+                        if (Notify.needsPermission) {
+                            Notify.requestPermission(function () {
+                                myNotify.show();
+                            });
+                        } else {
+                            myNotify.show();
+                        }
                     }
 
-                    return {
+                    result = {
                         notify           : function (p) {
+                            //初始化，默认去验证权限
                             return new _notify(p);
+                        },
+                        notSetPermission : Notify.permissionLevel == 'default',
+                        checkPermission  : function (onSuccess, onError, onThen) {
+                            //验证权限，设置开启与禁止
+                            var onSuccess = onSuccess || function () {
+                                };
+                            var onError = onError || function () {
+                                };
+                            var onThen = onThen || function () {
+                                };
+                            if (Notify.needsPermission) {
+                                Notify.requestPermission(function () {
+                                    result.permissionLevel = 'granted';
+                                    result.needsPermission = false;
+                                    onSuccess();
+                                }, function () {
+                                    result.permissionLevel = 'denied';
+                                    result.needsPermission = true;
+                                    onError();
+                                });
+                            } else {
+                                result.permissionLevel = 'granted';
+                                onSuccess();
+                            }
+                            result.notSetPermission = false;
+                            onThen();
                         },
                         needsPermission  : Notify.needsPermission,
                         requestPermission: Notify.requestPermission,
                         isSupported      : Notify.isSupported,
-                        permissionLevel  : Notify.permissionLevel,
-                        checkPermission  : function () {
-                            var self = this;
-                            self.hasPermission = true;
-                            self.sucess = function (_fun) {
-                                _fun ? _fun() : null;
-                                return self;
-                            };
-                            self.error = function (_fun) {
-                                _fun ? _fun() : null;
-                                return self;
-                            };
-                            self.then = function (_fun) {
-                                _fun ? _fun() : null;
-                                return self;
-                            };
-
-                            if (Notify.needsPermission) {
-                                Notify.requestPermission(function () {
-                                    self.hasPermission = true;
-                                    self.sucess();
-                                }, function () {
-                                    self.hasPermission = false;
-                                    self.error();
-                                });
-                            } else {
-                                self.sucess();
-                            }
-                            self.then();
-
-                            return self;
-                        }
+                        permissionLevel  : Notify.permissionLevel
                     };
+                    return result;
                 }
             ];
         }]);
