@@ -7,6 +7,13 @@ Worktile 项目启动工具包，gulp打包，less编译。
 angular provider 封装第三方插件 [notify.js](https://github.com/alexgibson/notify.js)。
 
 ```
+$wtNotifyProvider.config({
+    title: 'Worktile 桌面通知',
+    icon : '/img/wt-logo.png'
+});
+```
+
+```
 $wtNotify.notify({
     title: '桌面通知',
     body : 'Hey, 我在这里!'
