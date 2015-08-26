@@ -1,7 +1,7 @@
 angular-wt-genius
 =========
 
-Worktile 项目启动工具包。
+Worktile 项目启动工具包，gulp打包，less编译。
 
 ### 1.wt-genius-notify
 angular provider 封装第三方插件 [notify.js](https://github.com/alexgibson/notify.js)。
