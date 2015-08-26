@@ -18,6 +18,8 @@ $wtNotify.checkPermission(function () {
     //success
 }, function () {
     //error
+}, function () {
+    //then
 });
 ```
 
@@ -39,15 +41,15 @@ $wtNotify.checkPermission(function () {
 -----------------------------
 * `$wtNotify.notify` - 初始化方法(没有设置权限时，自动请求权限)
   
-* `$wtNotify.notSetPermission` - Boolean - 是否设置设置选前
+* `$wtNotify.notSetPermission` - Boolean - 未设置通知权限
   
 * `$wtNotify.checkPermission(onPermissionGrantedCallback, onPermissionDeniedCallback, onThenCallback)` - requestPermission 的封装方法，当没有设置权限时，自动请求权限。
 
 * `$wtNotify.requestPermission(onPermissionGrantedCallback, onPermissionDeniedCallback)` - requests permission from the user if needed and handles permission callbacks.
 
-* `$wtNotify.isSupported` - Boolean property to test for Web Notifications API browser support
+* `$wtNotify.isSupported` - Boolean - 浏览器支持
 
-* `$wtNotify.needsPermission` - Boolean property to check if permission is needed for the user to receive notifications.
+* `$wtNotify.needsPermission` - Boolean - 没有权限 (包括浏览器支持、未设置权限和禁止权限)
 
-* `$wtNotify.permissionLevel` - shows the user's current permission level (granted, denied or default), returns null if notifications are not supported.
+* `$wtNotify.permissionLevel` - (granted, denied or default) - 获取当前权限。
 
