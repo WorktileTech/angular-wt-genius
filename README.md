@@ -30,7 +30,7 @@ $wtNotify.checkPermission(function () {
 * icon: (string) - 图标
 * tag: (string) - 标识重复通知
 * lang: (string) - 文本格式 (default: `en`)
-* timeout: (integer) - 显示延时几秒关闭 (default: 2)
+* timeout: (integer) - 显示延时几秒关闭 (default: `2`)
 * notifyShow: (function) - 通知显示回调
 * notifyClose: (function) - 通知关闭回调
 * notifyClick: (function) - 通知点击回调
