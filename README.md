@@ -1,10 +1,17 @@
 angular-wt-genius
 =========
 
-Worktile 项目启动工具包。
+Worktile 项目启动工具包，gulp打包，less编译。
 
 ### 1.wt-genius-notify
 angular provider 封装第三方插件 [notify.js](https://github.com/alexgibson/notify.js)。
+
+```
+$wtNotifyProvider.config({
+    title: 'Worktile 桌面通知',
+    icon : '/img/wt-logo.png'
+});
+```
 
 ```
 $wtNotify.notify({
@@ -30,7 +37,7 @@ $wtNotify.checkPermission(function () {
 * icon: (string) - 图标
 * tag: (string) - 标识重复通知
 * lang: (string) - 文本格式 (default: `en`)
-* timeout: (integer) - 显示延时几秒关闭 (default: 2)
+* timeout: (integer) - 显示延时几秒关闭 (default: `2`)
 * notifyShow: (function) - 通知显示回调
 * notifyClose: (function) - 通知关闭回调
 * notifyClick: (function) - 通知点击回调
@@ -39,7 +46,7 @@ $wtNotify.checkPermission(function () {
 
 ##### Static methods and properties
 -----------------------------
-* `$wtNotify.notify` - 初始化方法(没有设置权限时，自动请求权限)
+* `$wtNotify.notify` - 初始化，并显示通知(没有设置权限时，自动请求权限)
   
 * `$wtNotify.notSetPermission` - Boolean - 未设置通知权限
   
