@@ -1,6 +1,10 @@
 {
   "name": "angular-wt-notify",
   "version": "1.0.0",
+  "authors": [
+    "zhenshuai <231640921@qq.com>"
+  ],
+  "license": "MIT",
   "main": [
     "./dist/angular-wt-genius-min.js",
     "./src"
