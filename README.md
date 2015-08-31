@@ -28,7 +28,7 @@ $wtNotify.notify({
 ```
 
 ```
-// 请求权限
+// 检查设置通知权限
 $wtNotify.checkPermission(function () {
     //success
 }, function () {
