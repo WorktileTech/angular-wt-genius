@@ -23,7 +23,10 @@ $wtNotifyProvider.config({
 // 插件参数设置
 $wtNotify.notify({
     title: '桌面通知',
-    body : 'Hey, 我在这里!'
+    body : 'Hey, 我在这里!',
+    notifyClick: function (){
+        console.log('通知点击事件')
+    }
 });
 ```
 
