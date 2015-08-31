@@ -12,6 +12,7 @@ bower install angular-wt-genius
 angular provider 封装第三方插件 [notify.js](https://github.com/alexgibson/notify.js)。
 
 ```
+// 全局配置
 $wtNotifyProvider.config({
     title: 'Worktile 桌面通知',
     icon : '/img/wt-logo.png'
@@ -19,6 +20,7 @@ $wtNotifyProvider.config({
 ```
 
 ```
+// 插件参数设置
 $wtNotify.notify({
     title: '桌面通知',
     body : 'Hey, 我在这里!'
@@ -26,6 +28,7 @@ $wtNotify.notify({
 ```
 
 ```
+// 请求权限
 $wtNotify.checkPermission(function () {
     //success
 }, function () {
