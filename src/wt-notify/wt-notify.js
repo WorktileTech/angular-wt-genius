@@ -4,7 +4,6 @@
  * Version: 1.0.0 - 2015-08-25
  * Anthor: zhenshuai
  */
-
 (function () {
     'use strict';
     angular.module('wt.genius')

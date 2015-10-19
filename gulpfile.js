@@ -29,7 +29,7 @@ gulp.task('style', function () {
         .pipe(gulp.dest('./dist/'));
 });
 gulp.task('js', function () {
-    return gulp.src(['./src/main.js', './src/wt-notify/wt-notify.js'])
+    return gulp.src(['./src/main.js', './src/*/*.js'])
         .pipe(plumber({errorHandler: error}))
         .pipe(concat('angular-wt-genius.js'))
         .pipe(gulp.dest('./dist/'));
