@@ -71,3 +71,16 @@ $wtNotify.checkPermission(function () {
 
 * `$wtNotify.permissionLevel` - (granted, denied or default) - 获取当前权限。
 
+
+### 2.wt-retina
+
+```
+$wtRetina.isRetina
+$wtRetina.media
+```
+
+##### Static methods and properties
+-------------------
+* `$wtRetina.isRetina` - Boolean - 是否 Retina 屏幕
+* `$wtRetina.media`    - String  - 匹配成功条件
+
