@@ -29,60 +29,59 @@ angular.module('wt.genius', []);
             this.config = function (value) {
                 configOptions = value;
             };
-            this.$get = ['$http', '$document', '$compile', '$rootScope', '$controller', '$templateCache', '$q', '$injector', '$position', '$timeout',
-                function ($http, $document, $compile, $rootScope, $controller, $templateCache, $q, $injector, $position, $timeout) {
-                    var result;
+            this.$get = [function () {
+                var result;
 
-                    function _notify(p) {
-                        var options = this.options = angular.extend({}, defaults, configOptions, p);
-                        var myNotify = new Notify(options.title, options);
+                function _notify(p) {
+                    var options = this.options = angular.extend({}, defaults, configOptions, p);
+                    var myNotify = new Notify(options.title, options);
+                    if (Notify.needsPermission) {
+                        Notify.requestPermission(function () {
+                            myNotify.show();
+                        });
+                    } else {
+                        myNotify.show();
+                    }
+                }
+
+                result = {
+                    notify           : function (p) {
+                        //初始化，默认去验证权限
+                        return new _notify(p);
+                    },
+                    notSetPermission : Notify.permissionLevel == 'default',
+                    checkPermission  : function (onSuccess, onError, onThen) {
+                        //验证权限，设置开启与禁止
+                        var onSuccess = onSuccess || function () {
+                            };
+                        var onError = onError || function () {
+                            };
+                        var onThen = onThen || function () {
+                            };
                         if (Notify.needsPermission) {
                             Notify.requestPermission(function () {
-                                myNotify.show();
+                                result.permissionLevel = 'granted';
+                                result.needsPermission = false;
+                                onSuccess();
+                            }, function () {
+                                result.permissionLevel = 'denied';
+                                result.needsPermission = true;
+                                onError();
                             });
                         } else {
-                            myNotify.show();
+                            result.permissionLevel = 'granted';
+                            onSuccess();
                         }
-                    }
-
-                    result = {
-                        notify           : function (p) {
-                            //初始化，默认去验证权限
-                            return new _notify(p);
-                        },
-                        notSetPermission : Notify.permissionLevel == 'default',
-                        checkPermission  : function (onSuccess, onError, onThen) {
-                            //验证权限，设置开启与禁止
-                            var onSuccess = onSuccess || function () {
-                                };
-                            var onError = onError || function () {
-                                };
-                            var onThen = onThen || function () {
-                                };
-                            if (Notify.needsPermission) {
-                                Notify.requestPermission(function () {
-                                    result.permissionLevel = 'granted';
-                                    result.needsPermission = false;
-                                    onSuccess();
-                                }, function () {
-                                    result.permissionLevel = 'denied';
-                                    result.needsPermission = true;
-                                    onError();
-                                });
-                            } else {
-                                result.permissionLevel = 'granted';
-                                onSuccess();
-                            }
-                            result.notSetPermission = false;
-                            onThen();
-                        },
-                        needsPermission  : Notify.needsPermission,
-                        requestPermission: Notify.requestPermission,
-                        isSupported      : Notify.isSupported,
-                        permissionLevel  : Notify.permissionLevel
-                    };
-                    return result;
-                }
+                        result.notSetPermission = false;
+                        onThen();
+                    },
+                    needsPermission  : Notify.needsPermission,
+                    requestPermission: Notify.requestPermission,
+                    isSupported      : Notify.isSupported,
+                    permissionLevel  : Notify.permissionLevel
+                };
+                return result;
+            }
             ];
         }]);
 })();
