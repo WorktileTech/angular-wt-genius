@@ -68,7 +68,7 @@
                             onSuccess && onSuccess();
                         }
                         result.notSetPermission = false;
-                        onThen();
+                        onThen && onThen();
                     },
                     needsPermission  : Notify.needsPermission,
                     requestPermission: Notify.requestPermission,
