@@ -1,6 +1,7 @@
 /**
  * $wtNotify
  *
+ * Version: 1.1.0 - 2016-09-23
  * Version: 1.0.0 - 2015-08-25
  * Anthor: zhenshuai
  */
