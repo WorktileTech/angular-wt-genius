@@ -51,25 +51,21 @@
                     notSetPermission : Notify.permissionLevel == 'default',
                     checkPermission  : function (onSuccess, onError, onThen) {
                         //验证权限，设置开启与禁止
-                        var onSuccess = onSuccess || function () {
-                            };
-                        var onError = onError || function () {
-                            };
-                        var onThen = onThen || function () {
-                            };
                         if (Notify.needsPermission) {
                             Notify.requestPermission(function () {
                                 result.permissionLevel = 'granted';
                                 result.needsPermission = false;
-                                onSuccess();
+                                onSuccess && onSuccess();
                             }, function () {
                                 result.permissionLevel = 'denied';
                                 result.needsPermission = true;
-                                onError();
+                                onError && onError();
+                            }, function () {
+                                result.notSetPermission = true;
                             });
                         } else {
                             result.permissionLevel = 'granted';
-                            onSuccess();
+                            onSuccess && onSuccess();
                         }
                         result.notSetPermission = false;
                         onThen();
@@ -80,7 +76,6 @@
                     permissionLevel  : Notify.permissionLevel
                 };
                 return result;
-            }
-            ];
+            }];
         }]);
 })();

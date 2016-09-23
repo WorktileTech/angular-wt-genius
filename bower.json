@@ -1,6 +1,6 @@
 {
   "name": "angular-wt-genius",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "authors": [
     "zhenshuai <231640921@qq.com>"
   ],
@@ -15,6 +15,6 @@
     "gulpfile.js"
   ],
   "dependencies": {
-    "notify.js": "1.2.5"
+    "notify.js": "git@github.com:zhenshuaiwws/notify.js.git"
   }
 }
