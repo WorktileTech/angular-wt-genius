@@ -32,12 +32,13 @@ angular.module('wt.genius', []);
             };
             this.$get = [function () {
                 var result;
+                var notify = Notify.default;
 
                 function _notify(p) {
                     var options = this.options = angular.extend({}, defaults, configOptions, p);
-                    var myNotify = new Notify(options.title, options);
-                    if (Notify.needsPermission) {
-                        Notify.requestPermission(function () {
+                    var myNotify = new notify(options.title, options);
+                    if (notify.needsPermission) {
+                        notify.requestPermission(function () {
                             myNotify.show();
                         });
                     } else {
@@ -50,11 +51,11 @@ angular.module('wt.genius', []);
                         //初始化，默认去验证权限
                         return new _notify(p);
                     },
-                    notSetPermission : Notify.permissionLevel == 'default',
+                    notSetPermission : notify.permissionLevel == 'default',
                     checkPermission  : function (onSuccess, onError, onThen) {
                         //验证权限，设置开启与禁止
-                        if (Notify.needsPermission) {
-                            Notify.requestPermission(function () {
+                        if (notify.needsPermission) {
+                            notify.requestPermission(function () {
                                 result.permissionLevel = 'granted';
                                 result.needsPermission = false;
                                 onSuccess && onSuccess();
@@ -72,10 +73,10 @@ angular.module('wt.genius', []);
                         result.notSetPermission = false;
                         onThen && onThen();
                     },
-                    needsPermission  : Notify.needsPermission,
-                    requestPermission: Notify.requestPermission,
-                    isSupported      : Notify.isSupported,
-                    permissionLevel  : Notify.permissionLevel
+                    needsPermission  : notify.needsPermission,
+                    requestPermission: notify.requestPermission,
+                    isSupported      : notify.isSupported,
+                    permissionLevel  : notify.permissionLevel
                 };
                 return result;
             }];
