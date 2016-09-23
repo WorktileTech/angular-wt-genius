@@ -1,20 +1,20 @@
 {
-  "name": "angular-wt-genius",
-  "version": "1.0.3",
-  "authors": [
-    "zhenshuai <231640921@qq.com>"
-  ],
-  "license": "MIT",
-  "main": [
-    "./dist/angular-wt-genius-min.js",
-    "./src"
-  ],
-  "ignore": [
-    "test",
-    "src",
-    "gulpfile.js"
-  ],
-  "dependencies": {
-    "notify.js": "git@github.com:zhenshuaiwws/notify.js.git"
-  }
+    "name": "angular-wt-genius",
+    "version": "1.0.3",
+    "authors": [
+        "zhenshuai <231640921@qq.com>"
+    ],
+    "license": "MIT",
+    "main": [
+        "./dist/angular-wt-genius-min.js",
+        "./src"
+    ],
+    "ignore": [
+        "test",
+        "src",
+        "gulpfile.js"
+    ],
+    "dependencies": {
+        "notify.js": "https://github.com/zhenshuaiwws/notify.js.git#master"
+    }
 }
