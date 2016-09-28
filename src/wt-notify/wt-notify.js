@@ -54,6 +54,9 @@
                     checkPermission  : function (onSuccess, onError, onThen) {
                         //验证权限，设置开启与禁止
                         if (notify.needsPermission) {
+                            if (!notify.isSupported()) {
+                                return;
+                            }
                             notify.requestPermission(function () {
                                 result.permissionLevel = 'granted';
                                 result.needsPermission = false;

@@ -2,7 +2,7 @@ angular.module('wt.genius', []);
 /**
  * $wtNotify
  *
- * Version: 1.1.0 - 2016-09-23
+ * Version: 1.1.3 - 2016-09-23
  * Version: 1.0.0 - 2015-08-25
  * Anthor: zhenshuai
  */
@@ -55,6 +55,9 @@ angular.module('wt.genius', []);
                     checkPermission  : function (onSuccess, onError, onThen) {
                         //验证权限，设置开启与禁止
                         if (notify.needsPermission) {
+                            if (!notify.isSupported()) {
+                                return;
+                            }
                             notify.requestPermission(function () {
                                 result.permissionLevel = 'granted';
                                 result.needsPermission = false;
