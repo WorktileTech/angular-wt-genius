@@ -36,7 +36,7 @@ angular.module('wt.genius', []);
 
                 function _notify(p) {
                     var options = this.options = angular.extend({}, defaults, configOptions, p);
-                    var myNotify = new notify(options.title, options);
+                    var myNotify = new Notify.default(options.title, options);
                     if (notify.needsPermission) {
                         notify.requestPermission(function () {
                             myNotify.show();
