@@ -7,7 +7,7 @@
     root.$wtNotify = factory(root.Notify);
   }
 }(this, function(Notify) {
-angular.module('wt.genius', []);
+var $wtNotify = angular.module('wt.genius', []);
 /**
  * $wtNotify
  *
