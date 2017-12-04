@@ -6,6 +6,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var plumber = require('gulp-plumber');
+var umd = require('gulp-umd');
 //var del = require('del');
 
 
@@ -32,6 +33,25 @@ gulp.task('js', function () {
     return gulp.src(['./src/main.js', './src/*/*.js'])
         .pipe(plumber({errorHandler: error}))
         .pipe(concat('angular-wt-genius.js'))
+        .pipe(umd({
+            exports: function(file) {
+                return '$wtNotify';
+            },
+            namespace: function(file) {
+                return '$wtNotify';
+            },
+            dependencies: function(file) {
+                return [
+                    {
+                        name: 'Notify',
+                        amd: 'Notify',
+                        cjs: 'Notify',
+                        global: 'Notify',
+                        param: 'Notify'
+                    }
+                ];
+            }
+        }))
         .pipe(gulp.dest('./dist/'));
 });
 gulp.task('js-min', function () {
@@ -40,5 +60,4 @@ gulp.task('js-min', function () {
         .pipe(concat('angular-wt-genius-min.js'))
         .pipe(gulp.dest('./dist/'));
 });
-
 gulp.task('default', ['style', 'js', 'js-min']);

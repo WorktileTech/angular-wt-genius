@@ -1,6 +1,6 @@
 {
   "name": "angular-wt-genius",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Worktile/Lesschat front end util. ## wt-genius-notify ## wt-genius-localData ## wt-genius-validatorName",
   "main": "gulpfile.js",
   "scripts": {
@@ -24,6 +24,7 @@
     "gulp-less": "^3.0.3",
     "gulp-plumber": "^1.0.1",
     "gulp-uglify": "^1.2.0",
-    "gulp-util": "^3.0.6"
+    "gulp-util": "^3.0.6",
+    "gulp-umd": "^0.2.1"
   }
 }
