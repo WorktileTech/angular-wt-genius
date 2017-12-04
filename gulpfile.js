@@ -35,10 +35,10 @@ gulp.task('js', function () {
         .pipe(concat('angular-wt-genius.js'))
         .pipe(umd({
             exports: function(file) {
-                return '$wtNotify';
+                return 'wtGenius';
             },
             namespace: function(file) {
-                return '$wtNotify';
+                return 'wtGenius';
             },
             dependencies: function(file) {
                 return [

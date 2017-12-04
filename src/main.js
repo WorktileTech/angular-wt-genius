@@ -1,1 +1,1 @@
-var $wtNotify = angular.module('wt.genius', []);
+var wtGenius = angular.module('wt.genius', []);
