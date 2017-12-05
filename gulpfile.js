@@ -7,6 +7,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var plumber = require('gulp-plumber');
 var umd = require('gulp-umd');
+
 //var del = require('del');
 
 
@@ -25,7 +26,7 @@ gulp.task('style', function () {
         .pipe(concat('angular-wt-genius-min.css'))
         .pipe(autoprefixer({
             browsers: ['last 2 versions'],
-            cascade : false
+            cascade: false
         }))
         .pipe(gulp.dest('./dist/'));
 });
@@ -34,18 +35,18 @@ gulp.task('js', function () {
         .pipe(plumber({errorHandler: error}))
         .pipe(concat('angular-wt-genius.js'))
         .pipe(umd({
-            exports: function(file) {
+            exports: function (file) {
                 return 'wtGenius';
             },
-            namespace: function(file) {
+            namespace: function (file) {
                 return 'wtGenius';
             },
-            dependencies: function(file) {
+            dependencies: function (file) {
                 return [
                     {
-                        name: 'Notify',
-                        amd: 'Notify',
-                        cjs: 'Notify',
+                        name: 'notify.js/dist/notify.js',
+                        amd: 'notify.js/dist/notify.js',
+                        cjs: 'notify.js/dist/notify.js',
                         global: 'Notify',
                         param: 'Notify'
                     }
